@@ -428,7 +428,7 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
       <div
         className={`self-end pt-8 opacity-50 md:col-span-2 lg:col-span-${itemsCount}`}
       >
-        &copy; {new Date().getFullYear()} / Shopify, Inc. Hydrogen is an MIT
+        &copy; {new Date().getFullYear()} / Clonezore, Inc. Clonezore is an MIT
         Licensed Open Source project.
       </div>
     </Section>
@@ -464,7 +464,7 @@ function FooterMenu({menu}: {menu?: EnhancedMenu}) {
           <Disclosure>
             {({open}) => (
               <>
-                <Disclosure.Button className="text-left md:cursor-default">
+                {/*    <Disclosure.Button className="text-left md:cursor-default">
                   <Heading className="flex justify-between" size="lead" as="h3">
                     {item.title}
                     {item?.items?.length > 0 && (
@@ -473,7 +473,7 @@ function FooterMenu({menu}: {menu?: EnhancedMenu}) {
                       </span>
                     )}
                   </Heading>
-                </Disclosure.Button>
+                </Disclosure.Button> */}
                 {item?.items?.length > 0 ? (
                   <div
                     className={`${
