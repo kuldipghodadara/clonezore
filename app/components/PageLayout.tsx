@@ -3,6 +3,8 @@ import useWindowScroll from 'react-use/esm/useWindowScroll';
 import {Disclosure} from '@headlessui/react';
 import {Suspense, useEffect, useMemo} from 'react';
 import {CartForm} from '@shopify/hydrogen';
+import {IoIosArrowDown} from 'react-icons/io';
+import {IoIosArrowUp} from 'react-icons/io';
 
 import {type LayoutQuery} from 'storefrontapi.generated';
 import {Text, Heading, Section} from '~/components/Text';
@@ -28,7 +30,7 @@ import {
 import {useIsHydrated} from '~/hooks/useIsHydrated';
 import {useCartFetchers} from '~/hooks/useCartFetchers';
 import type {RootLoader} from '~/root';
-
+import {useState} from 'react';
 type LayoutProps = {
   children: React.ReactNode;
   layout?: LayoutQuery & {
@@ -146,6 +148,11 @@ function MenuMobileNav({
   menu: EnhancedMenu;
   onClose: () => void;
 }) {
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null); // Track the open dropdown
+  const toggleDropdown = (id: string) => {
+    setOpenDropdown(openDropdown === id ? null : id); // Toggle dropdown visibility
+  };
+
   return (
     <nav className="grid gap-4 p-6 sm:gap-6 sm:px-12 sm:py-8">
       {/* Top level menu items */}
@@ -154,15 +161,51 @@ function MenuMobileNav({
           <Link
             to={item.to}
             target={item.target}
-            onClick={onClose}
             className={({isActive}) =>
               isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
             }
+            onClick={() => item.title === 'Catalog' && toggleDropdown(item.id)}
           >
             <Text as="span" size="copy">
               {item.title}
             </Text>
+            {/* {item.title === 'Catalog' && (
+              <IoIosArrowDown className="ml-2 inline-block" />
+            )} */}
+
+            {item.title === 'Catalog' && (
+              <span className="ml-2 inline-block">
+                {openDropdown === item.id ? (
+                  <IoIosArrowUp />
+                ) : (
+                  <IoIosArrowDown />
+                )}
+              </span>
+            )}
           </Link>
+
+          {/* Check if the item is 'Catalog' to show the dropdown */}
+          {item.title === 'Catalog' && openDropdown === item.id && (
+            <div className="ml-4 mt-2 bg-slate-600 shadow-md rounded-md p-4">
+              <ul>
+                <li className="mb-2">
+                  <Link to="/collections/all" onClick={onClose}>
+                    All
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link to="/collections/jewelry" onClick={onClose}>
+                    Jewelry
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link to="/collections/watches" onClick={onClose}>
+                    Watches
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          )}
         </span>
       ))}
     </nav>
@@ -180,9 +223,12 @@ function MobileHeader({
   openCart: () => void;
   openMenu: () => void;
 }) {
-  // useHeaderStyleFix(containerStyle, setContainerStyle, isHome);
-
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null); // State to track open dropdown
   const params = useParams();
+
+  const toggleDropdown = (id: string) => {
+    setOpenDropdown(openDropdown === id ? null : id); // Toggle dropdown visibility
+  };
 
   return (
     <header
@@ -191,7 +237,7 @@ function MobileHeader({
         isHome
           ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
           : 'bg-contrast/80 text-primary'
-      } flex lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`}
+      } flex bg-primary/80 text-primary lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`}
     >
       <div className="flex items-center justify-start w-full gap-4">
         <button
@@ -256,8 +302,34 @@ function DesktopHeader({
   menu?: EnhancedMenu;
   title: string;
 }) {
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const params = useParams();
   const {y} = useWindowScroll();
+
+  const toggleDropdown = (id: string) => {
+    setOpenDropdown(openDropdown === id ? null : id);
+  };
+
+  const handleLinkClick = () => {
+    setOpenDropdown(null);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!(event.target instanceof Element)) return;
+
+      const dropdown = event.target.closest('.dropdown');
+      if (!dropdown) {
+        setOpenDropdown(null); // Close dropdown if clicked outside
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
     <header
       role="banner"
@@ -266,8 +338,8 @@ function DesktopHeader({
           ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
           : 'bg-contrast/80 text-primary'
       } ${
-        !isHome && y > 50 && ' shadow-lightHeader'
-      } hidden h-nav lg:flex items-center sticky transition duration-300 backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`}
+        !isHome && y > 50 ? 'shadow-lightHeader' : ''
+      } hidden h-nav lg:flex items-center sticky transition duration-300 bg-primary/80 text-white backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`}
     >
       <div className="flex gap-12">
         <Link className="font-bold" to="/" prefetch="intent">
@@ -276,17 +348,56 @@ function DesktopHeader({
         <nav className="flex gap-8">
           {/* Top level menu items */}
           {(menu?.items || []).map((item) => (
-            <Link
-              key={item.id}
-              to={item.to}
-              target={item.target}
-              prefetch="intent"
-              className={({isActive}) =>
-                isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
-              }
-            >
-              {item.title}
-            </Link>
+            <div key={item.id} className="relative dropdown">
+              <Link
+                to={item.to}
+                target={item.target}
+                prefetch="intent"
+                className={({isActive}) =>
+                  isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
+                }
+                onClick={() =>
+                  item.title === 'Catalog' && toggleDropdown(item.id)
+                }
+              >
+                {item.title}
+                {/* {item.title === 'Catalog' && (
+                  <IoIosArrowDown className="ml-2 inline-block" />
+                )} */}
+
+                {item.title === 'Catalog' && (
+                  <span className="ml-2 inline-block">
+                    {openDropdown === item.id ? (
+                      <IoIosArrowUp />
+                    ) : (
+                      <IoIosArrowDown />
+                    )}
+                  </span>
+                )}
+              </Link>
+
+              {item.title === 'Catalog' && openDropdown === item.id && (
+                <div className="absolute left-0 mt-4 bg-slate-600  shadow-md rounded-md p-4 ">
+                  <ul className="">
+                    <li className="mb-2">
+                      <Link to="/collections/all" onClick={handleLinkClick}>
+                        all
+                      </Link>
+                    </li>
+                    <li className="mb-2">
+                      <Link to="/collections/jewelry" onClick={handleLinkClick}>
+                        jewelry
+                      </Link>
+                    </li>
+                    <li className="mb-2">
+                      <Link to="/collections/watches" onClick={handleLinkClick}>
+                        watches
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
           ))}
         </nav>
       </div>

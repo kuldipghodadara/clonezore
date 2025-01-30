@@ -18,6 +18,7 @@ import {PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {getImageLoadingPriority} from '~/lib/const';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
+import {SortFilter, type SortParam} from '~/components/SortFilter';
 
 const PAGE_BY = 8;
 
@@ -43,12 +44,12 @@ export async function loader({
     url: request.url,
     collection: {
       id: 'all-products',
-      title: 'All Products',
+      title: 'All Products ',
       handle: 'products',
       descriptionHtml: 'All the store products',
       description: 'All the store products',
       seo: {
-        title: 'All Products',
+        title: 'All Products ',
         description: 'All the store products',
       },
       metafields: [],
@@ -72,35 +73,37 @@ export default function AllProducts() {
 
   return (
     <>
-      <PageHeader heading="All Products" variant="allCollections" />
+      <PageHeader heading="All Products " variant="allCollections" />
       <Section>
-        <Pagination connection={products}>
-          {({nodes, isLoading, NextLink, PreviousLink}) => {
-            const itemsMarkup = nodes.map((product, i) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                loading={getImageLoadingPriority(i)}
-              />
-            ));
+        <SortFilter filters={[]}>
+          <Pagination connection={products}>
+            {({nodes, isLoading, NextLink, PreviousLink}) => {
+              const itemsMarkup = nodes.map((product, i) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  loading={getImageLoadingPriority(i)}
+                />
+              ));
 
-            return (
-              <>
-                <div className="flex items-center justify-center mt-6">
-                  <PreviousLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
-                    {isLoading ? 'Loading...' : 'Previous'}
-                  </PreviousLink>
-                </div>
-                <Grid data-test="product-grid">{itemsMarkup}</Grid>
-                <div className="flex items-center justify-center mt-6">
-                  <NextLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
-                    {isLoading ? 'Loading...' : 'Next'}
-                  </NextLink>
-                </div>
-              </>
-            );
-          }}
-        </Pagination>
+              return (
+                <>
+                  <div className="flex items-center justify-center mt-6">
+                    <PreviousLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
+                      {isLoading ? 'Loading...' : 'Previous'}
+                    </PreviousLink>
+                  </div>
+                  <Grid data-test="product-grid">{itemsMarkup}</Grid>
+                  <div className="flex items-center justify-center mt-6">
+                    <NextLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
+                      {isLoading ? 'Loading...' : 'Next'}
+                    </NextLink>
+                  </div>
+                </>
+              );
+            }}
+          </Pagination>
+        </SortFilter>
       </Section>
     </>
   );

@@ -43,24 +43,34 @@ export function SortFilter({
   children,
   collections = [],
 }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
+
+  const toggleFilters = () => {
+    setIsFiltersOpen((prevState) => !prevState);
+    if (isSortMenuOpen) setIsSortMenuOpen(false); // Close SortMenu if it's open
+  };
+
+  const toggleSortMenu = () => {
+    setIsSortMenuOpen((prevState) => !prevState);
+    if (isFiltersOpen) setIsFiltersOpen(false); // Close FiltersDrawer if it's open
+  };
+
   return (
     <>
       <div className="flex items-center justify-between w-full">
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={
-            'relative flex items-center justify-center w-8 h-8 focus:ring-primary/5'
-          }
+          onClick={toggleFilters}
+          className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
         >
           <IconFilters />
         </button>
-        <SortMenu />
+        <SortMenu isOpen={isSortMenuOpen} toggleSortMenu={toggleSortMenu} />
       </div>
       <div className="flex flex-col flex-wrap md:flex-row">
         <div
           className={`transition-all duration-200 ${
-            isOpen
+            isFiltersOpen
               ? 'opacity-100 min-w-full md:min-w-[240px] md:w-[240px] md:pr-8 max-h-full'
               : 'opacity-0 md:min-w-[0px] md:w-[0px] pr-0 max-h-0 md:max-h-full'
           }`}
@@ -265,7 +275,7 @@ function PriceRangeFilter({max, min}: {max?: number; min?: number}) {
           className="text-black"
           type="number"
           value={minPrice ?? ''}
-          placeholder={'$'}
+          placeholder={'₹'}
           onChange={onChangeMin}
         />
       </label>
@@ -276,7 +286,7 @@ function PriceRangeFilter({max, min}: {max?: number; min?: number}) {
           className="text-black"
           type="number"
           value={maxPrice ?? ''}
-          placeholder={'$'}
+          placeholder={'₹'}
           onChange={onChangeMax}
         />
       </label>
@@ -308,33 +318,28 @@ function filterInputToParams(
   return params;
 }
 
-export default function SortMenu() {
+export default function SortMenu({
+  isOpen,
+  toggleSortMenu,
+}: {
+  isOpen: boolean;
+  toggleSortMenu: () => void;
+}) {
   const items: {label: string; key: SortParam}[] = [
     {label: 'Featured', key: 'featured'},
-    {
-      label: 'Price: Low - High',
-      key: 'price-low-high',
-    },
-    {
-      label: 'Price: High - Low',
-      key: 'price-high-low',
-    },
-    {
-      label: 'Best Selling',
-      key: 'best-selling',
-    },
-    {
-      label: 'Newest',
-      key: 'newest',
-    },
+    {label: 'Price: Low - High', key: 'price-low-high'},
+    {label: 'Price: High - Low', key: 'price-high-low'},
+    {label: 'Best Selling', key: 'best-selling'},
+    {label: 'Newest', key: 'newest'},
   ];
+
   const [params] = useSearchParams();
   const location = useLocation();
   const activeItem = items.find((item) => item.key === params.get('sort'));
 
   return (
     <Menu as="div" className="relative z-40">
-      <Menu.Button className="flex items-center">
+      <Menu.Button onClick={toggleSortMenu} className="flex items-center">
         <span className="px-2">
           <span className="px-2 font-medium">Sort by:</span>
           <span>{(activeItem || items[0]).label}</span>
@@ -344,7 +349,9 @@ export default function SortMenu() {
 
       <Menu.Items
         as="nav"
-        className="absolute right-0 flex flex-col p-4 text-right rounded-sm bg-contrast"
+        className={`absolute right-0 flex flex-col p-4 text-right rounded-sm bg-contrast ${
+          isOpen ? '' : 'hidden'
+        }`}
       >
         {items.map((item) => (
           <Menu.Item key={item.label}>

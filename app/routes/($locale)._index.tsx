@@ -14,6 +14,7 @@ import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
 import {getHeroPlaceholder} from '~/lib/placeholders';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
+import Banner from '~/components/icon/banner';
 
 export const headers = routeHeaders;
 
@@ -155,6 +156,18 @@ export default function Homepage() {
 
   return (
     <>
+      <div className="">
+        <div className="">
+          <Banner />
+        </div>
+        <div className="text-center mt-8">
+          <h1 className="text-5xl ">Welcome to Clonezore</h1>
+          <p className="mt-8">
+            We're your one-stop online shop offering a curated selection of
+            high-quality products designed to elevate your everyday life.
+          </p>
+        </div>
+      </div>
       {primaryHero && (
         <Hero {...primaryHero} height="full" top loading="eager" />
       )}

@@ -147,6 +147,8 @@ export default function Collection() {
 
   const {ref, inView} = useInView();
 
+  const products = collection.products.nodes; // The filtered products list
+
   return (
     <>
       <PageHeader heading={collection.title}>
@@ -177,28 +179,42 @@ export default function Collection() {
               state,
             }) => (
               <>
-                <div className="flex items-center justify-center mb-6">
-                  <Button as={PreviousLink} variant="secondary" width="full">
-                    {isLoading ? 'Loading...' : 'Load previous'}
-                  </Button>
-                </div>
-                <ProductsLoadedOnScroll
-                  nodes={nodes}
-                  inView={inView}
-                  nextPageUrl={nextPageUrl}
-                  hasNextPage={hasNextPage}
-                  state={state}
-                />
-                <div className="flex items-center justify-center mt-6">
-                  <Button
-                    ref={ref}
-                    as={NextLink}
-                    variant="secondary"
-                    width="full"
-                  >
-                    {isLoading ? 'Loading...' : 'Load more products'}
-                  </Button>
-                </div>
+                {nodes.length === 0 ? (
+                  <div className="text-center py-8">
+                    <h3 className=" items-center max-sm:text-3xl">
+                      No products found matching your filters.
+                    </h3>
+                  </div>
+                ) : (
+                  <>
+                    <div className="flex items-center justify-center mb-6">
+                      <Button
+                        as={PreviousLink}
+                        variant="secondary"
+                        width="full"
+                      >
+                        {isLoading ? 'Loading...' : 'Load previous'}
+                      </Button>
+                    </div>
+                    <ProductsLoadedOnScroll
+                      nodes={nodes}
+                      inView={inView}
+                      nextPageUrl={nextPageUrl}
+                      hasNextPage={hasNextPage}
+                      state={state}
+                    />
+                    <div className="flex items-center justify-center mt-6">
+                      <Button
+                        ref={ref}
+                        as={NextLink}
+                        variant="secondary"
+                        width="full"
+                      >
+                        {isLoading ? 'Loading...' : 'Load more products'}
+                      </Button>
+                    </div>
+                  </>
+                )}
               </>
             )}
           </Pagination>

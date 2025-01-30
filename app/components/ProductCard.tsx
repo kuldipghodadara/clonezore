@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import {flattenConnection, Image, Money, useMoney} from '@shopify/hydrogen';
 import type {MoneyV2, Product} from '@shopify/hydrogen/storefront-api-types';
-
+import {SortFilter} from '~/components/SortFilter';
 import type {ProductCardFragment} from 'storefrontapi.generated';
 import {Text} from '~/components/Text';
 import {Link} from '~/components/Link';
@@ -53,11 +53,11 @@ export function ProductCard({
         prefetch="viewport"
       >
         <div className={clsx('grid gap-4', className)}>
-          <div className="card-image aspect-[4/5] bg-primary/5">
+          <div className="card-image aspect-[4/5] bg-primary/5  hover:animate-pulse">
             {image && (
               <Image
-                className="object-cover w-full fadeIn"
-                sizes="(min-width: 64em) 25vw, (min-width: 48em) 30vw, 45vw"
+                className="object-cover w-full fadeIn "
+                sizes="(min-width: 64em) 25vw, (min-width: 48em) 30vw, 45vw "
                 aspectRatio="4/5"
                 data={image}
                 alt={image.altText || `Picture of ${product.title}`}

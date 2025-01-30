@@ -197,13 +197,88 @@ export default function Product() {
           </div>
         </div>
       </Section>
+      <div className="grid grid-cols-3 gap-2 w-5/6 m-auto ">
+        <div className="border p-8">
+          <div className="text-center  ">
+            <div className="flex justify-center ">
+              {' '}
+              <img
+                src="https://clonezore.myshopify.com/cdn/shop/files/Free_Delivery_-_Made_with_PosterMyWall.png?v=1737461684&width=150"
+                width={150}
+                height={250}
+              ></img>
+            </div>
+
+            <div className="">
+              <h3
+                className="text-xl
+"
+              >
+                free shipping{' '}
+              </h3>
+              <p className="">
+                We’re excited to offerfree shippingon all orders, no minimum
+                required! Whether you're shopping for the latest trends
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="border p-8">
+          <div className="text-center ">
+            <div className="flex justify-center ">
+              <img
+                src="https://clonezore.myshopify.com/cdn/shop/files/images__1_-removebg-preview.png?v=1737461888&width=150"
+                width={190}
+                height={250}
+              ></img>
+            </div>
+            <div className="">
+              <h3
+                className="text-xl
+"
+              >
+                Secure Payment{' '}
+              </h3>
+              <p className="">
+                Your security is our top priority! We use the latest encryption
+                technology to ensure that your personal and payment information
+                is always protected.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="border p-8">
+          <div className="text-center ">
+            <div className="flex justify-center ">
+              <img
+                src="https://clonezore.myshopify.com/cdn/shop/files/1085429.png?v=1737461818&width=150"
+                alt=""
+                width={150}
+                height={150}
+              ></img>
+            </div>
+            <div className="">
+              <h3
+                className="text-xl
+"
+              >
+                24/7 Customer Support
+              </h3>
+              <p className="">
+                Our dedicated support team is available24/7to help with anything
+                you need, anytime, anywhere.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
       <Suspense fallback={<Skeleton className="h-32" />}>
         <Await
           errorElement="There was a problem loading related products"
           resolve={recommended}
         >
           {(products) => (
-            <ProductSwimlane title="Related Products" products={products} />
+            <ProductSwimlane title="Related Products " products={products} />
           )}
         </Await>
       </Suspense>

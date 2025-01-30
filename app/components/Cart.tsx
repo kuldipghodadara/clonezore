@@ -37,6 +37,7 @@ export function Cart({
 }) {
   const linesCount = Boolean(cart?.lines?.edges?.length || 0);
 
+  console.log('cart', cart);
   return (
     <>
       <CartEmpty hidden={linesCount} onClose={onClose} layout={layout} />
