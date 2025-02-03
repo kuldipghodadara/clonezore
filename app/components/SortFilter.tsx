@@ -58,7 +58,7 @@ export function SortFilter({
 
   return (
     <>
-      <div className="flex items-center justify-between w-full">
+      <div className="flex items-center justify-between w-full  ">
         <button
           onClick={toggleFilters}
           className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5"
@@ -67,7 +67,7 @@ export function SortFilter({
         </button>
         <SortMenu isOpen={isSortMenuOpen} toggleSortMenu={toggleSortMenu} />
       </div>
-      <div className="flex flex-col flex-wrap md:flex-row">
+      <div className="flex flex-col flex-wrap md:flex-row overflow-y-auto  ">
         <div
           className={`transition-all duration-200 ${
             isFiltersOpen

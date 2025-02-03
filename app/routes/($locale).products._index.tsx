@@ -21,7 +21,6 @@ import {routeHeaders} from '~/data/cache';
 import {SortFilter, type SortParam} from '~/components/SortFilter';
 
 const PAGE_BY = 8;
-
 export const headers = routeHeaders;
 
 export async function loader({
@@ -75,35 +74,36 @@ export default function AllProducts() {
     <>
       <PageHeader heading="All Products " variant="allCollections" />
       <Section>
-        <SortFilter filters={[]}>
-          <Pagination connection={products}>
-            {({nodes, isLoading, NextLink, PreviousLink}) => {
-              const itemsMarkup = nodes.map((product, i) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  loading={getImageLoadingPriority(i)}
-                />
-              ));
+        {/*      <SortFilter filters={[]}> */}
+        <Pagination connection={products}>
+          {({nodes, isLoading, NextLink, PreviousLink}) => {
+            const itemsMarkup = nodes.map((product, i) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                loading={getImageLoadingPriority(i)}
+              />
+            ));
+            console.log(itemsMarkup);
 
-              return (
-                <>
-                  <div className="flex items-center justify-center mt-6">
-                    <PreviousLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
-                      {isLoading ? 'Loading...' : 'Previous'}
-                    </PreviousLink>
-                  </div>
-                  <Grid data-test="product-grid">{itemsMarkup}</Grid>
-                  <div className="flex items-center justify-center mt-6">
-                    <NextLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
-                      {isLoading ? 'Loading...' : 'Next'}
-                    </NextLink>
-                  </div>
-                </>
-              );
-            }}
-          </Pagination>
-        </SortFilter>
+            return (
+              <>
+                <div className="flex items-center justify-center mt-6">
+                  <PreviousLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
+                    {isLoading ? 'Loading...' : 'Previous'}
+                  </PreviousLink>
+                </div>
+                <Grid data-test="product-grid">{itemsMarkup}</Grid>
+                <div className="flex items-center justify-center mt-6">
+                  <NextLink className="inline-block rounded font-medium text-center py-3 px-6 border border-primary/10 bg-contrast text-primary w-full">
+                    {isLoading ? 'Loading...' : 'Next'}
+                  </NextLink>
+                </div>
+              </>
+            );
+          }}
+        </Pagination>
+        {/*       </SortFilter> */}
       </Section>
     </>
   );

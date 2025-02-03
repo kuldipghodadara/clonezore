@@ -15,6 +15,7 @@ export default {
       screens: {
         sm: '32em',
         md: '48em',
+
         lg: '64em',
         xl: '80em',
         '2xl': '96em',

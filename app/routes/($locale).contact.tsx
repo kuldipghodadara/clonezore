@@ -89,11 +89,7 @@ export default function Search() {
         <Heading as="h1" size="copy">
           Search
         </Heading>
-        <h2>{searchTerm}</h2>
-        <Form
-          method="get"
-          className="relative flex w-full text-heading md:hidden"
-        >
+        <Form method="get" className="relative flex w-full text-heading">
           <Input
             defaultValue={searchTerm}
             name="q"
@@ -101,9 +97,9 @@ export default function Search() {
             type="search"
             variant="search"
           />
-          {/*  <button className="absolute right-0 py-2" type="submit">
+          <button className="absolute right-0 py-2" type="submit">
             Go
-          </button> */}
+          </button>
         </Form>
       </PageHeader>
       {!searchTerm || noResults ? (

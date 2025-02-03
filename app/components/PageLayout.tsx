@@ -5,7 +5,12 @@ import {Suspense, useEffect, useMemo} from 'react';
 import {CartForm} from '@shopify/hydrogen';
 import {IoIosArrowDown} from 'react-icons/io';
 import {IoIosArrowUp} from 'react-icons/io';
-
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn,
+  FaInstagram,
+} from 'react-icons/fa';
 import {type LayoutQuery} from 'storefrontapi.generated';
 import {Text, Heading, Section} from '~/components/Text';
 import {Link} from '~/components/Link';
@@ -14,6 +19,8 @@ import {CartLoading} from '~/components/CartLoading';
 import {Input} from '~/components/Input';
 import {Drawer, useDrawer} from '~/components/Drawer';
 import {CountrySelector} from '~/components/CountrySelector';
+`
+`;
 import {
   IconMenu,
   IconCaret,
@@ -196,6 +203,11 @@ function MenuMobileNav({
                 <li className="mb-2">
                   <Link to="/collections/jewelry" onClick={onClose}>
                     Jewelry
+                  </Link>
+                </li>
+                <li className="mb-2">
+                  <Link to="/collections/clothing" onClick={onClose}>
+                    clothing
                   </Link>
                 </li>
                 <li className="mb-2">
@@ -390,6 +402,14 @@ function DesktopHeader({
                       </Link>
                     </li>
                     <li className="mb-2">
+                      <Link
+                        to="/collections/clothing"
+                        onClick={handleLinkClick}
+                      >
+                        clothing
+                      </Link>
+                    </li>
+                    <li className="mb-2">
                       <Link to="/collections/watches" onClick={handleLinkClick}>
                         watches
                       </Link>
@@ -531,16 +551,94 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
       divider={isHome ? 'none' : 'top'}
       as="footer"
       role="contentinfo"
-      className={`grid min-h-[25rem] items-start grid-flow-row w-full gap-6 py-8 px-6 md:px-8 lg:px-12 md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-${itemsCount}
-        bg-primary dark:bg-contrast dark:text-primary text-contrast overflow-hidden`}
+      className="bg-gray-800"
+      /*    className={`grid min-h-[25rem] items-start grid-flow-row w-full gap-6 py-8 px-6 md:px-8 lg:px-12 md:gap-8 lg:gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-${itemsCount}
+        bg-primary dark:bg-contrast dark:text-primary text-contrast overflow-hidden`} */
     >
-      <FooterMenu menu={menu} />
-      <CountrySelector />
-      <div
+      {/*    <FooterMenu menu={menu} /> */}
+      {/*  <CountrySelector />
+       */}
+      {/*    <div
         className={`self-end pt-8 opacity-50 md:col-span-2 lg:col-span-${itemsCount}`}
       >
         &copy; {new Date().getFullYear()} / Clonezore, Inc. Clonezore is an MIT
         Licensed Open Source project.
+      </div>
+ */}
+      <div className="bg-gray-800 text-white p-10">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-8">
+          <div className="space-y-3">
+            <h5 className="font-bold text-lg">Product</h5>
+            <ul className="text-sm">
+              <li>Overview</li>
+              <li>Features</li>
+              <li>Pricing</li>
+              <li>FAQs</li>
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <h5 className="font-bold text-lg">Use Cases</h5>
+            <ul className="text-sm">
+              <li>Small Business</li>
+              <li>Freelancers</li>
+              <li>Agencies</li>
+              <li>E-commerce</li>
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <h5 className="font-bold text-lg">Resources</h5>
+            <ul className="text-sm">
+              <li>Blog</li>
+              <li>Help center</li>
+              <li>Community</li>
+              <li>Tutorials</li>
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <h5 className="font-bold text-lg">Company</h5>
+            <ul className="text-sm">
+              <li>About us</li>
+              <li>Careers</li>
+              <li>Press</li>
+              <li>Contact</li>
+            </ul>
+          </div>
+          <div className="space-y-3">
+            <h5 className="font-bold text-lg">policy</h5>
+            <ul className="text-sm">
+              <li>
+                <Link to="/policies">policy</Link>
+              </li>
+              <li>
+                <Link to="/policies/privacy-policy">privacy-policy</Link>
+              </li>
+              <li>
+                <Link to="/policies/terms-of-service">terms of service</Link>
+              </li>
+              <li>
+                <Link to="/policies/refund-policy">refund policy</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="bg-gray-900 mt-8 py-6 text-center text-sm">
+          <p>HAVE GOOD WEB DESIGN TODAY</p>
+          <p>Transform your ideas into reality with stunning web design.</p>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-2">
+            Get started
+          </button>
+          <div className="flex justify-center space-x-4 mt-4">
+            <FaFacebookF />
+            <FaTwitter />
+            <FaLinkedinIn />
+            <FaInstagram />
+          </div>
+          <p className="text-gray-400 mt-4">
+            &copy; {new Date().getFullYear()} / Clonezore, Inc. Clonezore is an
+            MIT Licensed Open Source project.
+          </p>
+        </div>
       </div>
     </Section>
   );
