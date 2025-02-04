@@ -5,6 +5,8 @@ import {Suspense, useEffect, useMemo} from 'react';
 import {CartForm} from '@shopify/hydrogen';
 import {IoIosArrowDown} from 'react-icons/io';
 import {IoIosArrowUp} from 'react-icons/io';
+import {FiSun, FiMoon} from 'react-icons/fi';
+
 import {
   FaFacebookF,
   FaTwitter,
@@ -50,7 +52,7 @@ export function PageLayout({children, layout}: LayoutProps) {
   const {headerMenu, footerMenu} = layout || {};
   return (
     <>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen ">
         <div className="">
           <a href="#mainContent" className="sr-only">
             Skip to content
@@ -70,6 +72,15 @@ export function PageLayout({children, layout}: LayoutProps) {
 
 function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
   const isHome = useIsHomePath();
+  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
+
+  useEffect(() => {
+    document.body.classList.toggle('dark', isDarkMode);
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => !prev);
+  };
 
   const {
     isOpen: isCartOpen,
@@ -102,12 +113,16 @@ function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
         title={title}
         menu={menu}
         openCart={openCart}
+        toggleTheme={toggleTheme} // Pass toggle function to DesktopHeader
+        isDarkMode={isDarkMode} // Pass current theme state
       />
       <MobileHeader
         isHome={isHome}
         title={title}
         openCart={openCart}
         openMenu={openMenu}
+        toggleTheme={toggleTheme} // Pass toggle function to DesktopHeader
+        isDarkMode={isDarkMode} // Pass current theme state
       />
     </>
   );
@@ -161,35 +176,40 @@ function MenuMobileNav({
   };
 
   return (
-    <nav className="grid gap-4 p-6 sm:gap-6 sm:px-12 sm:py-8">
+    <nav className="grid gap-4 p-6 sm:gap-6 sm:px-12 sm:py-8 ">
       {/* Top level menu items */}
       {(menu?.items || []).map((item) => (
-        <span key={item.id} className="block">
-          <Link
-            to={item.to}
-            target={item.target}
-            className={({isActive}) =>
-              isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
-            }
-            onClick={() => item.title === 'Catalog' && toggleDropdown(item.id)}
-          >
-            <Text as="span" size="copy">
-              {item.title}
-            </Text>
-            {/* {item.title === 'Catalog' && (
+        <span key={item.id} className="block ">
+          <span className="flex items-center">
+            <Link
+              to={item.to}
+              target={item.target}
+              className={({isActive}) =>
+                isActive
+                  ? 'pb-1 border-b -mb-px flex items-center'
+                  : 'pb-1 flex items-center'
+              }
+              onClick={() =>
+                item.title === 'Catalog' && toggleDropdown(item.id)
+              }
+            >
+              <Text as="span" size="copy">
+                {item.title}
+              </Text>
+              {/* {item.title === 'Catalog' && (
               <IoIosArrowDown className="ml-2 inline-block" />
             )} */}
-
-            {item.title === 'Catalog' && (
-              <span className="ml-2 inline-block">
-                {openDropdown === item.id ? (
-                  <IoIosArrowUp />
-                ) : (
-                  <IoIosArrowDown />
-                )}
-              </span>
-            )}
-          </Link>
+              {item.title === 'Catalog' && (
+                <span className="ml-2 inline-block ">
+                  {openDropdown === item.id ? (
+                    <IoIosArrowUp />
+                  ) : (
+                    <IoIosArrowDown />
+                  )}
+                </span>
+              )}
+            </Link>
+          </span>
 
           {/* Check if the item is 'Catalog' to show the dropdown */}
           {item.title === 'Catalog' && openDropdown === item.id && (
@@ -229,11 +249,15 @@ function MobileHeader({
   isHome,
   openCart,
   openMenu,
+  toggleTheme,
+  isDarkMode,
 }: {
   title: string;
   isHome: boolean;
   openCart: () => void;
   openMenu: () => void;
+  toggleTheme: () => void; // Add toggleTheme prop
+  isDarkMode: boolean; // Add isDarkMode prop
 }) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null); // State to track open dropdown
   const params = useParams();
@@ -298,6 +322,16 @@ function MobileHeader({
       <div className="flex items-center justify-end w-full gap-4">
         <AccountLink className="relative flex items-center justify-center w-8 h-8" />
         <CartCount isHome={isHome} openCart={openCart} />
+        <button
+          onClick={toggleTheme}
+          className="flex items-center justify-center w-8 h-8"
+        >
+          {isDarkMode ? (
+            <FiSun className="text-white" />
+          ) : (
+            <FiMoon className="text-white" />
+          )}
+        </button>
       </div>
     </header>
   );
@@ -308,11 +342,15 @@ function DesktopHeader({
   menu,
   openCart,
   title,
+  toggleTheme,
+  isDarkMode,
 }: {
   isHome: boolean;
   openCart: () => void;
   menu?: EnhancedMenu;
   title: string;
+  toggleTheme: () => void; // Add toggleTheme prop
+  isDarkMode: boolean; // Add isDarkMode prop
 }) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const params = useParams();
@@ -366,7 +404,9 @@ function DesktopHeader({
                 target={item.target}
                 prefetch="intent"
                 className={({isActive}) =>
-                  isActive ? 'pb-1 border-b -mb-px' : 'pb-1'
+                  isActive
+                    ? 'pb-1 border-b -mb-px flex items-center'
+                    : 'pb-1 flex items-center'
                 }
                 onClick={() =>
                   item.title === 'Catalog' && toggleDropdown(item.id)
@@ -447,6 +487,19 @@ function DesktopHeader({
         </Form>
         <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" />
         <CartCount isHome={isHome} openCart={openCart} />
+        <div className="flex items-center gap-1">
+          {/* Theme toggle button */}
+          <button
+            onClick={toggleTheme}
+            className="flex items-center justify-center w-8 h-8"
+          >
+            {isDarkMode ? (
+              <FiSun className="text-white" />
+            ) : (
+              <FiMoon className="text-white" />
+            )}
+          </button>
+        </div>
       </div>
     </header>
   );

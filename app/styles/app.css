@@ -180,3 +180,36 @@ shop-pay-button {
     }
   }
 }
+
+.dark {
+  background-color: black;
+  color: aliceblue;
+}
+.dark p {
+  color: aliceblue;
+}
+.dark a {
+  color: aliceblue;
+}
+.dark .dark-b {
+  color: rgb(20, 99, 168);
+  background-color: #d3ccee;
+}
+
+.dark section {
+  background-color: black;
+}
+.dark section button {
+  background-color: black;
+  color: aliceblue;
+}
+.dark header {
+  background-color: black;
+}
+.dark header button {
+  color: aliceblue;
+}
+
+.dark .dark-menu {
+  background-color: black;
+}
