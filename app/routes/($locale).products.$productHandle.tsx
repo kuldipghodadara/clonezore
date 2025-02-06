@@ -33,12 +33,14 @@ import {AddToCartButton} from '~/components/AddToCartButton';
 import {Skeleton} from '~/components/Skeleton';
 import {ProductSwimlane} from '~/components/ProductSwimlane';
 import {ProductGallery} from '~/components/ProductGallery';
-import {IconCaret, IconCheck, IconClose} from '~/components/Icon';
+import {IconCaret, IconCheck, IconClose, IconShipping} from '~/components/Icon';
 import {getExcerpt} from '~/lib/utils';
 import {seoPayload} from '~/lib/seo.server';
 import type {Storefront} from '~/lib/type';
 import {routeHeaders} from '~/data/cache';
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/data/fragments';
+import {IconPayment} from '~/components/icon/payment';
+import {IconCustomer} from '~/components/icon/customer';
 
 export const headers = routeHeaders;
 
@@ -156,7 +158,7 @@ export default function Product() {
               <div className=" grid gap-2">
                 <Heading
                   as="h1"
-                  className="whitespace-normal`  
+                  className="whitespace-normal`
 
 "
                 >
@@ -202,11 +204,13 @@ export default function Product() {
           <div className="text-center  ">
             <div className="flex justify-center ">
               {' '}
-              <img
+              {/* <img
+                className="dark-image"
                 src="https://clonezore.myshopify.com/cdn/shop/files/Free_Delivery_-_Made_with_PosterMyWall.png?v=1737461684&width=150"
                 width={150}
                 height={250}
-              ></img>
+              ></img> */}
+              <IconShipping />
             </div>
 
             <div className="">
@@ -226,11 +230,13 @@ export default function Product() {
         <div className="border p-8">
           <div className="text-center ">
             <div className="flex justify-center ">
-              <img
+              {/* <img
+                className="dark-image"
                 src="https://clonezore.myshopify.com/cdn/shop/files/images__1_-removebg-preview.png?v=1737461888&width=150"
                 width={190}
                 height={250}
-              ></img>
+              ></img> */}
+              <IconPayment />
             </div>
             <div className="">
               <h3
@@ -250,12 +256,15 @@ export default function Product() {
         <div className="border p-8">
           <div className="text-center ">
             <div className="flex justify-center ">
-              <img
+              {/* <img
+                className="dark-image"
                 src="https://clonezore.myshopify.com/cdn/shop/files/1085429.png?v=1737461818&width=150"
                 alt=""
                 width={150}
                 height={150}
-              ></img>
+              ></img> */}
+
+              <IconCustomer />
             </div>
             <div className="">
               <h3
@@ -331,7 +340,7 @@ export function ProductForm({
               {option.name}
             </Heading> */}
 
-            <div className="flex flex-wrap items-baseline gap-4">
+            <div className="flex flex-wrap items-baseline gap-4 ">
               {
                 option.optionValues.length > 1 ? (
                   <div className="relative w-full">
@@ -342,9 +351,9 @@ export function ProductForm({
                           <Listbox.Button
                             ref={closeRef}
                             className={clsx(
-                              'flex items-center justify-between w-full py-3 px-4 border border-primary',
+                              'flex items-center justify-between w-full py-3 px-4 border border-primary ',
                               open
-                                ? 'rounded-b md:rounded-t md:rounded-b-none'
+                                ? 'rounded-b md:rounded-t md:rounded-b-none '
                                 : 'rounded',
                             )}
                           >
@@ -359,7 +368,7 @@ export function ProductForm({
                           <Listbox.Options
                             className={clsx(
                               'border-primary bg-contrast absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b',
-                              open ? 'max-h-48' : 'max-h-0',
+                              open ? 'max-h-48 dark-mode' : 'max-h-0 ',
                             )}
                           >
                             {option.optionValues
@@ -457,10 +466,11 @@ export function ProductForm({
                 ]}
                 variant="primary"
                 data-test="add-to-cart"
+                className="dark-button"
               >
                 <Text
                   as="span"
-                  className="flex items-center justify-center gap-2"
+                  className="flex items-center justify-center gap-2 "
                 >
                   <span>Add to Cart</span> <span>·</span>{' '}
                   <Money

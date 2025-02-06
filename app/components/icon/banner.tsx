@@ -3,7 +3,9 @@ export default function Banner() {
     <>
       <img
         src="https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-1170x780.jpg"
-        className="w-screen h-screen hover:animate-pulse"
+        className="  hover:animate-pulse overflow-y-scroll "
+        width="100%"
+        height="100%"
       ></img>
     </>
   );

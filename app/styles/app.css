@@ -181,6 +181,10 @@ shop-pay-button {
   }
 }
 
+.dark body {
+  background-color: black;
+}
+
 .dark {
   background-color: black;
   color: aliceblue;
@@ -212,4 +216,55 @@ shop-pay-button {
 
 .dark .dark-menu {
   background-color: black;
+}
+
+.dark .dark-drop {
+  background-color: rgb(164, 151, 175);
+}
+
+.dark .dark-image {
+  background-color: white;
+}
+
+.dark .dark-mode {
+  background-color: black;
+}
+
+.dark .dark-button {
+  background-color: #d3ccee;
+}
+
+.dark label {
+  color: white;
+}
+.dark .dark-form {
+  background-color: rgba(107, 92, 92, 0.32);
+}
+
+.dark h2 {
+  color: white;
+}
+.dark h3 {
+  color: white;
+}
+.dark strong {
+  color: white;
+}
+.dark li {
+  color: white;
+}
+.dark th {
+  color: white;
+}
+
+.dark .dark-hover:hover {
+  color: rgb(210, 135, 135);
+}
+
+.dark .dark-label {
+  color: black;
+}
+
+.dark span {
+  color: white;
 }

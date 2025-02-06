@@ -3,13 +3,19 @@ import {
   type MetaArgs,
   type LoaderFunctionArgs,
 } from '@shopify/remix-oxygen';
-import {useLoaderData} from '@remix-run/react';
+import {
+  useLoaderData,
+  useLocation,
+  useNavigate,
+  useNavigation,
+} from '@remix-run/react';
 import invariant from 'tiny-invariant';
 import {getSeoMeta} from '@shopify/hydrogen';
 
 import {PageHeader} from '~/components/Text';
 import {routeHeaders} from '~/data/cache';
 import {seoPayload} from '~/lib/seo.server';
+import ContactForm from '~/custom-page/contactForm';
 
 export const headers = routeHeaders;
 
@@ -38,15 +44,28 @@ export const meta = ({matches}: MetaArgs<typeof loader>) => {
 
 export default function Page() {
   const {page} = useLoaderData<typeof loader>();
+  const location = useLocation();
+  const {state} = useNavigation();
+  console.log(location);
 
   return (
     <>
-      <PageHeader heading={page.title}>
-        <div
-          dangerouslySetInnerHTML={{__html: page.body}}
-          className="prose dark:prose-invert"
-        />
-      </PageHeader>
+      {state === 'loading' ? (
+        <>
+          <h1>Loading...</h1>
+        </>
+      ) : (
+        <PageHeader heading={page.title}>
+          {location.pathname === '/pages/contact' ? (
+            <ContactForm />
+          ) : (
+            <div
+              dangerouslySetInnerHTML={{__html: page.body}}
+              className="prose dark:prose-invert"
+            />
+          )}
+        </PageHeader>
+      )}
     </>
   );
 }

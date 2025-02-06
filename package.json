@@ -20,7 +20,8 @@
   ],
   "prettier": "@shopify/prettier-config",
   "dependencies": {
-    "@headlessui/react": "^1.7.2",
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
     "@remix-run/node": "^2.13.1",
     "@remix-run/react": "^2.13.1",
     "@remix-run/server-runtime": "^2.13.1",
@@ -29,6 +30,7 @@
     "@shopify/remix-oxygen": "^2.0.9",
     "clsx": "^1.2.1",
     "cross-env": "^7.0.3",
+    "emailjs-com": "^3.2.0",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "install": "^0.13.0",

@@ -159,6 +159,10 @@ export default function Homepage() {
       <div className="">
         <div className="">
           <Banner />
+          {/*  <img
+            src="https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-1170x780.jpg"
+            className="w-full hover:animate-pulse "
+          ></img> */}
         </div>
         <div className="text-center mt-8">
           <h1 className="text-5xl ">Welcome to Clonezore</h1>

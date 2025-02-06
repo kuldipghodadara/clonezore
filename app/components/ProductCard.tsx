@@ -67,7 +67,7 @@ export function ProductCard({
             <Text
               as="label"
               size="fine"
-              className="absolute top-0 right-0 m-4 text-right text-notice"
+              className="absolute top-0 right-0 m-4 text-right text-notice dark-label"
             >
               {cardLabel}
             </Text>
@@ -102,9 +102,9 @@ export function ProductCard({
             },
           ]}
           variant="secondary"
-          className="mt-2"
+          className="mt-2 dark-button"
         >
-          <Text as="span" className="flex items-center justify-center gap-2">
+          <Text as="span" className="flex items-center justify-center gap-2 ">
             Add to Cart
           </Text>
         </AddToCartButton>

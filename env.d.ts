@@ -25,7 +25,7 @@ declare global {
     PRIVATE_STOREFRONT_API_TOKEN: string;
     PUBLIC_STORE_DOMAIN: string;
     PUBLIC_STOREFRONT_ID: string;
-    PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID: string;
+    SHOPIFY_ADMIN_API_URL: string;
     PUBLIC_CUSTOMER_ACCOUNT_API_URL: string;
     PUBLIC_CHECKOUT_DOMAIN: string;
     SHOP_ID: string;

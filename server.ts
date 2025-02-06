@@ -61,7 +61,7 @@ export default {
         waitUntil,
         request,
         session,
-        customerAccountId: env.PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID,
+        customerAccountId: env.SHOPIFY_ADMIN_API_URL,
         shopId: env.SHOP_ID,
       });
 

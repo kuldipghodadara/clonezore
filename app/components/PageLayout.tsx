@@ -176,7 +176,7 @@ function MenuMobileNav({
   };
 
   return (
-    <nav className="grid gap-4 p-6 sm:gap-6 sm:px-12 sm:py-8 ">
+    <nav className="grid gap-4 p-6 sm:gap-6 sm:px-12 sm:py-8 dark-menu">
       {/* Top level menu items */}
       {(menu?.items || []).map((item) => (
         <span key={item.id} className="block ">
@@ -189,9 +189,13 @@ function MenuMobileNav({
                   ? 'pb-1 border-b -mb-px flex items-center'
                   : 'pb-1 flex items-center'
               }
-              onClick={() =>
-                item.title === 'Catalog' && toggleDropdown(item.id)
-              }
+              onClick={() => {
+                if (item.title === 'Catalog') {
+                  toggleDropdown(item.id);
+                } else {
+                  onClose();
+                }
+              }}
             >
               <Text as="span" size="copy">
                 {item.title}
@@ -211,7 +215,6 @@ function MenuMobileNav({
             </Link>
           </span>
 
-          {/* Check if the item is 'Catalog' to show the dropdown */}
           {item.title === 'Catalog' && openDropdown === item.id && (
             <div className="ml-4 mt-2 bg-slate-600 shadow-md rounded-md p-4">
               <ul>
@@ -319,12 +322,12 @@ function MobileHeader({
         </Heading>
       </Link>
 
-      <div className="flex items-center justify-end w-full gap-4">
+      <div className="flex items-center justify-end w-full gap-2">
         <AccountLink className="relative flex items-center justify-center w-8 h-8" />
         <CartCount isHome={isHome} openCart={openCart} />
         <button
           onClick={toggleTheme}
-          className="flex items-center justify-center w-8 h-8"
+          // className="flex items-center justify-center w-8 h-8"
         >
           {isDarkMode ? (
             <FiSun className="text-white" />
@@ -391,8 +394,8 @@ function DesktopHeader({
         !isHome && y > 50 ? 'shadow-lightHeader' : ''
       } hidden h-nav lg:flex items-center sticky transition duration-300 bg-primary/80 text-white backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`}
     >
-      <div className="flex gap-12">
-        <Link className="font-bold" to="/" prefetch="intent">
+      <div className="flex gap-12 items-center">
+        <Link className="font-bold text-2xl" to="/" prefetch="intent">
           {title}
         </Link>
         <nav className="flex gap-8">
@@ -487,19 +490,19 @@ function DesktopHeader({
         </Form>
         <AccountLink className="relative flex items-center justify-center w-8 h-8 focus:ring-primary/5" />
         <CartCount isHome={isHome} openCart={openCart} />
-        <div className="flex items-center gap-1">
-          {/* Theme toggle button */}
-          <button
-            onClick={toggleTheme}
-            className="flex items-center justify-center w-8 h-8"
-          >
-            {isDarkMode ? (
-              <FiSun className="text-white" />
-            ) : (
-              <FiMoon className="text-white" />
-            )}
-          </button>
-        </div>
+        {/* <div className="flex items-center gap-1"> */}
+        {/* Theme toggle button */}
+        <button
+          onClick={toggleTheme}
+          className="flex items-center justify-center w-8 h-8"
+        >
+          {isDarkMode ? (
+            <FiSun className="text-white" />
+          ) : (
+            <FiMoon className="text-white" />
+          )}
+        </button>
+        {/* </div> */}
       </div>
     </header>
   );
@@ -510,7 +513,11 @@ function AccountLink({className}: {className?: string}) {
   const isLoggedIn = rootData?.isLoggedIn;
 
   return (
-    <Link to="/account" className={className}>
+    <Link
+      to="https://shopify.com/92059500866/account/profile"
+      className={className}
+      target=""
+    >
       <Suspense fallback={<IconLogin />}>
         <Await resolve={isLoggedIn} errorElement={<IconLogin />}>
           {(isLoggedIn) => (isLoggedIn ? <IconAccount /> : <IconLogin />)}
@@ -562,12 +569,10 @@ function Badge({
         <IconBag />
         <div
           className={`${
-            dark
-              ? 'text-primary bg-contrast dark:text-contrast dark:bg-primary'
-              : 'text-contrast bg-primary'
-          } absolute bottom-1 right-1 text-[0.625rem] font-medium subpixel-antialiased h-3 min-w-[0.75rem] flex items-center justify-center leading-none text-center rounded-full w-auto px-[0.125rem] pb-px`}
+            dark ? 'bg-black ' : ' bg-black '
+          } absolute bottom-1 right-1 text-[0.625rem] font-medium subpixel-antialiased h-3 min-w-[0.75rem] flex items-center  justify-center leading-none text-center rounded-full w-auto px-[0.125rem] pb-px`}
         >
-          <span>{count || 0}</span>
+          <span className="">{count || 0}</span>
         </div>
       </>
     ),
@@ -676,16 +681,29 @@ function Footer({menu}: {menu?: EnhancedMenu}) {
         </div>
 
         <div className="bg-gray-900 mt-8 py-6 text-center text-sm">
-          <p>HAVE GOOD WEB DESIGN TODAY</p>
+          {/* <p>HAVE GOOD WEB DESIGN TODAY</p>
           <p>Transform your ideas into reality with stunning web design.</p>
           <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-2">
             Get started
-          </button>
+          </button> */}
           <div className="flex justify-center space-x-4 mt-4">
-            <FaFacebookF />
-            <FaTwitter />
-            <FaLinkedinIn />
-            <FaInstagram />
+            <Link to="https://www.facebook.com/shopify/" target="blank">
+              {' '}
+              <FaFacebookF />
+            </Link>
+
+            <Link to="https://x.com/Shopify" target="blank">
+              {' '}
+              <FaTwitter />
+            </Link>
+            <Link to="https://ca.linkedin.com/company/shopify" target="blank">
+              {' '}
+              <FaLinkedinIn />
+            </Link>
+            <Link to="https://www.instagram.com/shopify/" target="blank">
+              {' '}
+              <FaInstagram />
+            </Link>
           </div>
           <p className="text-gray-400 mt-4">
             &copy; {new Date().getFullYear()} / Clonezore, Inc. Clonezore is an
