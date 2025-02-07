@@ -82,7 +82,7 @@ export default function AllProducts() {
     />
   ));
 
-  console.log(itemsMarkup);
+  // console.log(itemsMarkup);
   return (
     <>
       <PageHeader heading="All Products " variant="allCollections" />

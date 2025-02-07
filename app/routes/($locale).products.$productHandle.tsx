@@ -327,7 +327,7 @@ export function ProductForm({
     selectedVariant?.price?.amount &&
     selectedVariant?.compareAtPrice?.amount &&
     selectedVariant?.price?.amount < selectedVariant?.compareAtPrice?.amount;
-  console.log(productOptions);
+  // console.log(productOptions);
   return (
     <div className="grid gap-10">
       <div className="grid gap-4">
