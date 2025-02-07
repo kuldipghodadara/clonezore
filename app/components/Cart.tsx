@@ -188,9 +188,9 @@ function CartCheckoutActions({checkoutUrl}: {checkoutUrl: string}) {
   if (!checkoutUrl) return null;
 
   return (
-    <div className="flex flex-col mt-2">
+    <div className="flex flex-col mt-2 ">
       <a href={checkoutUrl} target="_self">
-        <Button as="span" width="full">
+        <Button as="span" width="full" className="dark-button">
           Continue to Checkout
         </Button>
       </a>

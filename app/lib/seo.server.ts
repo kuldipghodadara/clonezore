@@ -31,7 +31,7 @@ function root({
 }): SeoConfig {
   return {
     title: shop?.name,
-    titleTemplate: '%s | Hydrogen Demo Store',
+    titleTemplate: '%s | Clonezore',
     description: truncate(shop?.description ?? ''),
     handle: '@shopify',
     url,
@@ -64,7 +64,7 @@ function root({
 function home({url}: {url: Request['url']}): SeoConfig {
   return {
     title: 'Home',
-    titleTemplate: '%s | Hydrogen Demo Store',
+    titleTemplate: 'Clonezore',
     description: 'The best place to buy snowboarding products',
     url,
     robots: {

@@ -15,6 +15,7 @@ import {getHeroPlaceholder} from '~/lib/placeholders';
 import {seoPayload} from '~/lib/seo.server';
 import {routeHeaders} from '~/data/cache';
 import Banner from '~/components/icon/banner';
+import CountdownTimer from '~/components/CountdownTimer';
 
 export const headers = routeHeaders;
 
@@ -153,7 +154,7 @@ export default function Homepage() {
 
   // TODO: skeletons vs placeholders
   const skeletons = getHeroPlaceholder([{}, {}, {}]);
-
+  const targetDate = '2025-12-31T00:00:00Z';
   return (
     <>
       <div className="">
@@ -164,6 +165,11 @@ export default function Homepage() {
             className="w-full hover:animate-pulse "
           ></img> */}
         </div>
+        <div className="flex justify-center mt-4">
+          {' '}
+          <CountdownTimer targetDate={targetDate} />
+        </div>
+
         <div className="text-center mt-8">
           <h1 className="text-5xl ">Welcome to Clonezore</h1>
           <p className="mt-8">

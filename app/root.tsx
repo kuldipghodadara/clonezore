@@ -151,6 +151,18 @@ function Layout({children}: {children?: React.ReactNode}) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="msvalidate.01" content="A352E6A0AF9A652267361BBB572B8468" />
         <link rel="stylesheet" href={styles}></link>
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="../public/favicon-16x16.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="../public/favicon-32x32.png"
+        />
         <Meta />
         <Links />
       </head>

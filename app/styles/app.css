@@ -165,7 +165,7 @@ shop-pay-button {
       top: 50%;
       transform: translateY(-50%);
       background: rgb(var(--color-primary));
-      box-shadow: 0.5px 0.5px 0px 0.5px rgb(var(--color-contrast));
+      /*       box-shadow: 0.5px 0.5px 0px 0.5px rgb(var(--color-contrast)); */
     }
   }
 
@@ -179,6 +179,10 @@ shop-pay-button {
       @apply aspect-[inherit] w-full object-cover;
     }
   }
+}
+
+body {
+  box-shadow: 0 0 #0000;
 }
 
 .dark body {

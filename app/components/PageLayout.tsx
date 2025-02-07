@@ -395,7 +395,7 @@ function DesktopHeader({
       } hidden h-nav lg:flex items-center sticky transition duration-300 bg-primary/80 text-white backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`}
     >
       <div className="flex gap-12 items-center">
-        <Link className="font-bold text-2xl" to="/" prefetch="intent">
+        <Link className="font-bold text-2xl " to="/" prefetch="intent">
           {title}
         </Link>
         <nav className="flex gap-8">
@@ -570,7 +570,7 @@ function Badge({
         <div
           className={`${
             dark ? 'bg-black ' : ' bg-black '
-          } absolute bottom-1 right-1 text-[0.625rem] font-medium subpixel-antialiased h-3 min-w-[0.75rem] flex items-center  justify-center leading-none text-center rounded-full w-auto px-[0.125rem] pb-px`}
+          } absolute bottom-1 right-1 text-[0.625rem] font-medium subpixel-antialiased h-3 min-w-[0.75rem] flex items-center  justify-center leading-none text-center rounded-full w-auto px-[0.125rem] pb-px text-white`}
         >
           <span className="">{count || 0}</span>
         </div>
