@@ -6,6 +6,7 @@ import {CartForm} from '@shopify/hydrogen';
 import {IoIosArrowDown} from 'react-icons/io';
 import {IoIosArrowUp} from 'react-icons/io';
 import {FiSun, FiMoon} from 'react-icons/fi';
+import {IoBagHandleOutline} from 'react-icons/io5';
 
 import {
   FaFacebookF,
@@ -115,6 +116,9 @@ function Header({title, menu}: {title: string; menu?: EnhancedMenu}) {
         openCart={openCart}
         toggleTheme={toggleTheme} // Pass toggle function to DesktopHeader
         isDarkMode={isDarkMode} // Pass current theme state
+        onClose={function (): void {
+          throw new Error('Function not implemented.');
+        }}
       />
       <MobileHeader
         isHome={isHome}
@@ -186,7 +190,7 @@ function MenuMobileNav({
               target={item.target}
               className={({isActive}) =>
                 isActive
-                  ? 'pb-1 border-b -mb-px flex items-center'
+                  ? 'pb-1 border-b -mb-px flex items-center '
                   : 'pb-1 flex items-center'
               }
               onClick={() => {
@@ -274,9 +278,9 @@ function MobileHeader({
       role="banner"
       className={`${
         isHome
-          ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-          : 'bg-contrast/80 text-primary'
-      } flex bg-primary/80 text-primary lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8`}
+          ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader dark-header'
+          : 'bg-contrast/80 text-primary dark-header'
+      } flex bg-primary/80 text-primary lg:hidden items-center h-nav sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 px-4 md:px-8 dark-header`}
     >
       <div className="flex items-center justify-start w-full gap-4">
         <button
@@ -347,7 +351,9 @@ function DesktopHeader({
   title,
   toggleTheme,
   isDarkMode,
+  onClose,
 }: {
+  onClose: () => void;
   isHome: boolean;
   openCart: () => void;
   menu?: EnhancedMenu;
@@ -389,10 +395,10 @@ function DesktopHeader({
       className={`${
         isHome
           ? 'bg-primary/80 dark:bg-contrast/60 text-contrast dark:text-primary shadow-darkHeader'
-          : 'bg-contrast/80 text-primary'
+          : 'bg-contrast/80 text-primary dark-header'
       } ${
         !isHome && y > 50 ? 'shadow-lightHeader' : ''
-      } hidden h-nav lg:flex items-center sticky transition duration-300 bg-primary/80 text-white backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8`}
+      } hidden h-nav lg:flex items-center sticky transition duration-300 bg-primary/80 text-white backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-8 px-12 py-8 dark-header`}
     >
       <div className="flex gap-12 items-center">
         <Link className="font-bold text-2xl " to="/" prefetch="intent">
@@ -411,9 +417,13 @@ function DesktopHeader({
                     ? 'pb-1 border-b -mb-px flex items-center'
                     : 'pb-1 flex items-center'
                 }
-                onClick={() =>
-                  item.title === 'Catalog' && toggleDropdown(item.id)
-                }
+                onClick={() => {
+                  if (item.title === 'Catalog') {
+                    toggleDropdown(item.id);
+                  } else {
+                    onClose();
+                  }
+                }}
               >
                 {item.title}
                 {/* {item.title === 'Catalog' && (
@@ -566,7 +576,7 @@ function Badge({
   const BadgeCounter = useMemo(
     () => (
       <>
-        <IconBag />
+        <IoBagHandleOutline />
         <div
           className={`${
             dark ? 'bg-black ' : ' bg-black '

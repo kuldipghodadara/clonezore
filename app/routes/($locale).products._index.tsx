@@ -82,13 +82,15 @@ export default function AllProducts() {
     />
   ));
 
-  // console.log(itemsMarkup);
   return (
     <>
       <PageHeader heading="All Products " variant="allCollections" />
       <Section>
         <Pagination connection={products}>
           {({nodes, isLoading, NextLink, PreviousLink}) => {
+            /*  {
+              console.log(nodes);
+            } */
             return (
               <>
                 <Grid data-test="product-grid">{itemsMarkup}</Grid>

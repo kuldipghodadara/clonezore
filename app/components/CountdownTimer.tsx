@@ -124,7 +124,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({targetDate}) => {
 
   return (
     <div>
-      <div className="flex font-bold text-5xl font-digit  gap-x-2">
+      <div className="flex font-bold text-5xl font-digit  gap-x-2 digit">
         <div className="text-center">
           <h1 className="">{String(timeLeft.days).padStart(2, '0')}</h1>
           <h1 className="text-2xl text-center">Day</h1>

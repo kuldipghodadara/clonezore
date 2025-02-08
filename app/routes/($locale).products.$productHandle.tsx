@@ -353,7 +353,7 @@ export function ProductForm({
                             className={clsx(
                               'flex items-center justify-between w-full py-3 px-4 border border-primary ',
                               open
-                                ? 'rounded-b md:rounded-t md:rounded-b-none '
+                                ? 'rounded-b md:rounded-t md:rounded-b-none dark-list'
                                 : 'rounded',
                             )}
                           >
@@ -367,8 +367,10 @@ export function ProductForm({
                           </Listbox.Button>
                           <Listbox.Options
                             className={clsx(
-                              'border-primary bg-contrast absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b',
-                              open ? 'max-h-48 dark-mode' : 'max-h-0 ',
+                              'border-primary bg-contrast absolute bottom-12 z-30 grid h-48 w-full overflow-y-scroll rounded-t border px-2 py-2 transition-[max-height] duration-150 sm:bottom-auto md:rounded-b md:rounded-t-none md:border-t-0 md:border-b dark-list',
+                              open
+                                ? 'max-h-48 dark-mode dark-list'
+                                : 'max-h-0 dark-list',
                             )}
                           >
                             {option.optionValues

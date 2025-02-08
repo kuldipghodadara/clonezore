@@ -259,7 +259,11 @@ function CartLineItem({line}: {line: CartLine}) {
         display: optimisticData?.action === 'remove' ? 'none' : 'flex',
       }}
     >
-      <div className="flex-shrink">
+      <Link
+        to={`/products/${merchandise.product.handle}`}
+        className="flex-shrink"
+        target="_parent"
+      >
         {merchandise.image && (
           <Image
             width={110}
@@ -269,7 +273,7 @@ function CartLineItem({line}: {line: CartLine}) {
             alt={merchandise.title}
           />
         )}
-      </div>
+      </Link>
 
       <div className="flex justify-between flex-grow">
         <div className="grid gap-2">

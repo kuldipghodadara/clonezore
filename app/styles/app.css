@@ -272,3 +272,16 @@ body {
 .dark span {
   color: white;
 }
+.dark .dark-header {
+  background-color: #413c51;
+}
+
+.digit {
+  font-family: 'Orbitron', serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.dark .dark-list {
+  background-color: rgb(109, 108, 108);
+}

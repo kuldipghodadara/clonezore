@@ -86,9 +86,9 @@ export default function Search() {
   return (
     <>
       <PageHeader>
-        <Heading as="h1" size="copy">
+        {/* <Heading as="h1" size="copy">
           Search
-        </Heading>
+        </Heading> */}
         <h2>{searchTerm}</h2>
         <Form
           method="get"

@@ -171,7 +171,7 @@ export function PageHeader({
 }) {
   const variants: Record<string, string> = {
     default:
-      'grid w-full gap-8 p-6 py-8 md:p-8 lg:p-12 justify-items-start justify-center',
+      'grid w-full gap-8 p-6 py-8 md:p-8 lg:p-12 justify-items-start justify-center ',
     blogPost:
       'grid md:text-center w-full gap-4 p-6 py-8 md:p-8 lg:p-12 md:justify-items-center',
     allCollections:
