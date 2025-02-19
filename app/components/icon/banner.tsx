@@ -19,7 +19,7 @@ export default function Banner() {
         {/* Image */}
         <div className="">
           <img
-            src="https://img.freepik.com/free-photo/shopping-concept-close-up-portrait-young-beautiful-attractive-redhair-girl-smiling-looking-camera-with-shopping-bag-blue-pastel-background-copy-space_1258-128517.jpg?t=st=1738989333~exp=1738992933~hmac=2587956c8eb62cd6a7186422776f66a523d3b6d8f18220511dce498394c5263d&w=1380"
+            src="../public/shopping-concept-close-up-portrait-young-beautiful-attractive-redhair-girl-smiling-looking-camera_1258-126800.jpg"
             className="w-full h-auto"
             alt="banner"
           />

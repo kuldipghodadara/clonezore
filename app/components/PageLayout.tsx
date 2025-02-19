@@ -426,10 +426,10 @@ function DesktopHeader({
                 }}
               >
                 {item.title}
+
                 {/* {item.title === 'Catalog' && (
                   <IoIosArrowDown className="ml-2 inline-block" />
                 )} */}
-
                 {item.title === 'Catalog' && (
                   <span className="ml-2 inline-block">
                     {openDropdown === item.id ? (
@@ -472,6 +472,9 @@ function DesktopHeader({
               )}
             </div>
           ))}
+          <Link to="./about">About</Link> {/* This already points to /about */}
+          <Link to="./track">track</Link>
+          {/* <Link to="https://clonezore.myshopify.com/track">track</Link> */}
         </nav>
       </div>
       <div className="flex items-center gap-1">

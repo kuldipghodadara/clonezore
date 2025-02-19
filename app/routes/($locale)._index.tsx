@@ -161,11 +161,12 @@ export default function Homepage() {
         <div className="">
           <Banner />
 
-          {/*  <img
-            src="https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-1170x780.jpg"
+          {/* <img
+            src="../public/shopping-concept-close-up-portrait-young-beautiful-attractive-redhair-girl-smiling-looking-camera_1258-126800.jpg"
             className="w-full hover:animate-pulse "
-          ></img> */}
+          /> */}
         </div>
+
         <div className="flex justify-center mt-4">
           {' '}
           <CountdownTimer targetDate={targetDate} />
